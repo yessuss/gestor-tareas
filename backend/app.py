@@ -3,11 +3,18 @@ from flask_sqlalchemy import SQLAlchemy
 import enum
 from datetime import datetime, timezone
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)
+db_user = os.getenv("DB_USER", "taskuser")
+db_password = os.getenv("DB_PASSWORD", "taskpassword")
+db_host = os.getenv("DB_HOST", "localhost")
+db_port = os.getenv("DB_PORT", "5432")
+db_name = os.getenv("DB_NAME", "taskmanager")
+
 app.config["SQLALCHEMY_DATABASE_URI"] = (
-    "postgresql://taskuser:taskpassword@localhost:5432/taskmanager"
+    f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
 )
 
 db = SQLAlchemy(app)
