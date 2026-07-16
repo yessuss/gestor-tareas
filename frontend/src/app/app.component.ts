@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
 
   newTitle = '';
   newDescription = '';
+  newPriority ='';
 
   constructor(private taskService: TaskService) {}
 
@@ -29,12 +30,19 @@ export class AppComponent implements OnInit {
 
   addTask(): void {
     if (!this.newTitle.trim()) {
+      alert('Titulo no puede ir vacio');
       return;
     }
-    this.taskService.create(this.newTitle, this.newDescription).subscribe({
+
+    if (!this.newPriority) {
+      alert('Por favor seleccione una prioridad');
+      return;
+    }
+    this.taskService.create(this.newTitle, this.newDescription, this.newPriority).subscribe({
       next: () => {
         this.newTitle = '';
         this.newDescription = '';
+        this.newPriority='';
         this.fetchTasks(); // recarga la lista para mostrar la nueva tarea
       },
       error: (err) => console.error('Error al crear tarea:', err)

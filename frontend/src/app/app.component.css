@@ -6,7 +6,7 @@ h1 {
 
 /* Contenedor del formulario */
 .form-container {
-  max-width: 500px;
+  max-width: 600px;
   margin: 1.5rem auto;
   background: white;
   padding: 1.25rem;
@@ -45,7 +45,7 @@ h1 {
 
 /* Lista de tareas */
 .tasks-container {
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto 2rem;
 }
 
@@ -131,4 +131,43 @@ ul {
 
 .btn-delete:hover {
   background: #fecaca;
+}
+
+.task-priority {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  margin-left: 0.4rem;
+}
+
+.priority-low {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.priority-medium {
+  background: #fef9c3;
+  color: #a16207;
+}
+
+.priority-high {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.form-container select {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.form-container select:invalid,
+.form-container select option[value=""] {
+  color: #94a3b8;
 }

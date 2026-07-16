@@ -17,12 +17,22 @@ class TaskStatus(str, enum.Enum):
     IN_PROGRESS = "in_progress"
     COMPLETED = "completed"
 
+class TaskPriority(str, enum.Enum):
+    LOW = "low"
+    MEDIUM = "medium"
+    HIGH = "high"
+
 class Task(db.Model):
     __tablename__= "tasks"
     
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150), nullable=False)
     description = db.Column(db.Text, nullable=True)
+    priority = db.Column(
+        db.Enum(TaskPriority, name="task_priority"),
+        nullable=False,
+        default=TaskPriority.MEDIUM,
+    )
     status = db.Column(
         db.Enum(TaskStatus, name="task_status"),
         nullable=False,
@@ -37,6 +47,7 @@ class Task(db.Model):
             "id": self.id,
             "title": self.title,
             "description": self.description,
+            "priority": self.priority.value,
             "status": self.status.value,
             "created_at": self.created_at.isoformat(),
         }
@@ -50,7 +61,13 @@ def create_task():
     if not title:
         return jsonify({"error":"El campo title es obligatorio"}), 400
     
-    task = Task(title=title, description=data.get("description",""))
+    priority_value = data.get("priority", "MEDIUM")
+    try:
+        priority = TaskPriority(priority_value)
+    except ValueError:
+        return jsonify({"error": f"priority inválido: {priority_value}"}), 400
+    
+    task = Task(title=title, description=data.get("description",""), priority = priority)
     db.session.add(task)
     db.session.commit()
     

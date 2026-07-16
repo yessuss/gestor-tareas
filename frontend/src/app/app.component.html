@@ -4,6 +4,12 @@
   <h3>Nueva tarea</h3>
   <input type="text" [(ngModel)]="newTitle" placeholder="Título" />
   <input type="text" [(ngModel)]="newDescription" placeholder="Descripción (opcional)" />
+  <select [(ngModel)]="newPriority">
+    <option value="" disabled selected>Selecciona una prioridad</option>
+    <option value="low">Baja</option>
+    <option value="medium">Media</option>
+    <option value="high">Alta</option>
+  </select>
   <button (click)="addTask()">+ Crear tarea</button>
 </div>
 
@@ -16,6 +22,9 @@
         <strong>{{ task.title }}</strong>
         <span class="task-status" [ngClass]="'status-' + task.status">
           {{ task.status }}
+        </span>
+        <span class="task-priority" [ngClass]="'priority-' + task.priority">
+          {{ task.priority }}
         </span>
         <span class="task-description" *ngIf="task.description">{{ task.description }}</span>
       </div>
