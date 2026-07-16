@@ -80,4 +80,14 @@ export class AppComponent implements OnInit {
     });
   }
 
+  tasksByStatus(status: TaskStatus): Task[] {
+    return this.tasks.filter((task) => task.status === status);
+  }
+  
+  nextStatusLabel(task: Task): string {
+    if (task.status === 'pending') return 'Iniciar';
+    if (task.status === 'in_progress') return 'Completar';
+    return '';
+  }
+
 }
