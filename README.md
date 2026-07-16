@@ -19,8 +19,8 @@ Aplicación full-stack para gestionar el ciclo de vida de tareas (pendiente → 
 **Requisitos:** tener [Docker Desktop](https://www.docker.com/products/docker-desktop) instalado y corriendo.
 
 ```bash
-git clone https://github.com/TU-USUARIO/TU-REPOSITORIO.git
-cd mi-gestor-tareas
+git clone https://github.com/yessuss/gestor-tareas.git
+cd gestor-tareas
 docker compose up --build
 ```
 
