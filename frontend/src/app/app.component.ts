@@ -15,6 +15,17 @@ export class AppComponent implements OnInit {
   newDescription = '';
   newPriority ='';
 
+  statusLabels: Record<string, string> = {
+    pending: 'Pendiente',
+    in_progress: 'En progreso',
+    completed: 'Completada'
+  };
+
+  priorityLabels: Record<string, string> = {
+    low: 'Baja',
+    medium: 'Media',
+    high: 'Alta'
+  };
   constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {

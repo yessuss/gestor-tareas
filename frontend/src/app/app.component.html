@@ -21,10 +21,10 @@
       <div class="task-info">
         <strong>{{ task.title }}</strong>
         <span class="task-status" [ngClass]="'status-' + task.status">
-          {{ task.status }}
+          {{ statusLabels[task.status] }}
         </span>
         <span class="task-priority" [ngClass]="'priority-' + task.priority">
-          {{ task.priority }}
+          {{ priorityLabels[task.priority] }}
         </span>
         <span class="task-description" *ngIf="task.description">{{ task.description }}</span>
       </div>
