@@ -68,7 +68,7 @@ def create_task():
     if not title:
         return jsonify({"error":"El campo title es obligatorio"}), 400
     
-    priority_value = data.get("priority", "MEDIUM")
+    priority_value = data.get("priority", "medium")
     try:
         priority = TaskPriority(priority_value)
     except ValueError:
@@ -84,24 +84,6 @@ def create_task():
 def list_tasks():
     tasks = Task.query.order_by(Task.created_at.desc()).all()
     return jsonify([t.to_dict() for t in tasks]), 200
-
-@app.route("/api/tasks/<int:task_id>", methods=["GET"])
-def get_task(task_id):
-    task = Task.query.get_or_404(task_id)
-    return jsonify(task.to_dict()), 200
-
-@app.route("/api/tasks/<int:task_id>", methods=["PUT"])
-def update_task(task_id):
-    task = Task.query.get_or_404(task_id)
-    data = request.get_json()
-
-    if "title" in data:
-        task.title = data["title"]
-    if "description" in data:
-        task.description = data["description"]
-
-    db.session.commit()
-    return jsonify(task.to_dict()), 200
 
 @app.route("/api/tasks/<int:task_id>", methods=["DELETE"])
 def delete_task(task_id):
